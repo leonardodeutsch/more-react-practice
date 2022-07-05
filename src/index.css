@@ -25,3 +25,20 @@ code {
 }
 
 
+.my-button {
+  padding: 10px 20px;
+  background-color: rgb(97, 97, 255);
+  border-style: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.466);
+  cursor: pointer;
+}
+
+.my-button:hover {
+  background-color: rgb(43, 43, 255);
+}
+
+.my-button:active {
+  transform: scale(.95);
+}
+

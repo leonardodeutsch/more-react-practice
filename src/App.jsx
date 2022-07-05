@@ -4,6 +4,13 @@ import peopleData from './Data.js';
 const App = () => {
   const [people, setPeople] = useState(peopleData);
   const [sortAscending, setSortAscending] = useState(true);
+  const [nameSearched, setNameSearched] = useState('');
+  const [filteredPeople, setFilteredPeople] = useState(peopleData);
+
+  useEffect(() => {
+    setFilteredPeople(people.filter(person => person.name.toLowerCase().includes(nameSearched.toLowerCase())));
+  }, [nameSearched, people]);
+
 
   const sortNames = (people, header) => {
     const peopleCopy = [...people];
@@ -15,6 +22,10 @@ const App = () => {
     setSortAscending(prev => !prev);
   }
 
+  const searchName = (e) => {
+    setNameSearched(e.target.value);
+  }
+
   const idGenerator = () => {
     return Math.floor(Math.random() * 10000);
   }
@@ -22,6 +33,8 @@ const App = () => {
   return (
     <div>
       <h1>hi</h1>
+      <button className="my-button">hello</button>
+      <input type="text" className="search-name" onChange={searchName}/>
       <table className="people-table">
         <thead>
           <tr>
@@ -31,7 +44,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {people.map(person => (
+          {filteredPeople.map(person => (
             <tr key={idGenerator()}>
               {Object.values(person).map(info =>(
                 <td key={idGenerator()}>{info}</td>
